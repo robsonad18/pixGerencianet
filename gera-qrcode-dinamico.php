@@ -18,11 +18,11 @@ $requests = [
 	'valor' => [
 		'original' => '10.00',
 	],
-	'chave' 		     => '123456789',
+	'chave' 		         => '123456789',
 	'solicitacaoPagador' => 'Pagamento do pedido 123'
 ];
 
-$response = $obApiPix->createCob('WDEV12345678909876543211234', $requests);
+$response = $obApiPix->createCob('RL12345678909876543211234', $requests);
 
 if (!isset($response['location'])) {
 	echo 'Problemas ao gerar PIX dinamico:' . $response;
