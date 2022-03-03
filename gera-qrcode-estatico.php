@@ -12,8 +12,8 @@ $obPayload = (new Payload)
     ->setDescription("Pagamento do pedido 666")
     ->setMerchantName('Robson Lucas')
     ->setMerchantCity('SAO PAULO')
-    ->setAmount('100.00')
-    ->setTxId('rl1234');
+    ->setAmount('0')
+    ->setTxId(sha1(true));
 
 // Codigo de pagamento pix
 $payloadQrCode = $obPayload->getPayload();
@@ -22,18 +22,5 @@ $obQrCode = new QrCode($payloadQrCode);
 // Imagem do Qrcode
 $image = (new Output\Png)->output($obQrCode, 400);
 
-// header('Content-Type: image/png');
-// echo $image;
-?>
-
-<h1>Qr code estatico PIX</h1>
-
-<br />
-
-<img src="data:image/png;base64, <?= base64_encode($image) ?>" alt="">
-
-<br />
-<br />
-
-Codigo PIX:<br />
-<strong><?= $payloadQrCode ?></strong>
+header('Content-Type: image/png');
+echo $image;

@@ -18,11 +18,11 @@ $requests = [
 	'valor' => [
 		'original' => '10.00',
 	],
-	'chave' 		         => '123456789',
-	'solicitacaoPagador' => 'Pagamento do pedido 123'
+	'chave' 		     => '123456789',
+	'solicitacaoPagador' => 'Pagamento do pedido '.base64_encode(time())
 ];
 
-$response = $obApiPix->createCob('RL12345678909876543211234', $requests);
+$response = $obApiPix->createCob("", $requests);
 
 if (!isset($response['location'])) {
 	echo 'Problemas ao gerar PIX dinamico:' . $response;
@@ -43,18 +43,5 @@ $obQrCode = new QrCode($payloadQrCode);
 // Imagem do Qrcode
 $image = (new Output\Png)->output($obQrCode, 400);
 
-// header('Content-Type: image/png');
-// echo $image;
-?>
-
-<h1>Qr code estatico PIX</h1>
-
-<br />
-
-<img src="data:image/png;base64, <?= base64_encode($image) ?>" alt="">
-
-<br />
-<br />
-
-Codigo PIX:<br />
-<strong><?= $payloadQrCode ?></strong>
+header('Content-Type: image/png');
+echo $image;
